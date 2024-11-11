@@ -22,7 +22,10 @@ const Header = () => {
   return (
     <div className="header">
       <div className="logo-container">
-        <img className="logo" src="https://img.freepik.com/free-vector/food-shopping-logo-template-design_460848-10299.jpg?semt=ais_hybrid" />
+        <img
+          className="logo"
+          src="https://img.freepik.com/free-vector/food-shopping-logo-template-design_460848-10299.jpg?semt=ais_hybrid"
+        />
       </div>
       <div className="nav-items">
         <ul>
@@ -36,10 +39,23 @@ const Header = () => {
   );
 };
 
+const Body = () => {
+  return (
+    <div className="body">
+      <div className="search-box">
+        <input type="text" />
+      </div>
+
+      <div className="restaurant-container"></div>
+    </div>
+  );
+};
+
 const AppLayout = () => {
   return (
     <div className="app">
       <Header />
+      <Body />
     </div>
   );
 };
