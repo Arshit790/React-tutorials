@@ -78,3 +78,21 @@ root.render(title);
   </body>
 </html>
 ```
+
+/\*
+
+- Header
+- Logo
+- Navbar
+- Body
+- Search
+- Restaurant Container
+- -img
+- -name of res,stars,cuisine,delivery time
+- Footer
+- -copyrights
+-     -links
+- -address
+- -contact
+
+\*/
