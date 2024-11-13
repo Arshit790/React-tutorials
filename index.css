@@ -34,8 +34,9 @@
   box-shadow: 0 4px 8px black;
 }
 
-.search-box {
-  padding: 10px;
+.filter-btn {
+  cursor: pointer;
+  margin: 10px;
 }
 
 .res-logo {
