@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import RestaurantCard from "./RestaurantCard";
+import Shimmer from "./Shimmer";
 
 const Body = () => {
   // Local State Variable -  Super Powerful Variable
@@ -16,10 +17,17 @@ const Body = () => {
     );
 
     const json = await data.json();
+    // Optional Chaining
     setListOfRestaurant(
       json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants
     );
   };
+
+  // Conditional Rendering
+
+  if (listOfRestaurant.length === 0) {
+    return <Shimmer />;
+  }
 
   return (
     <div className="body">
