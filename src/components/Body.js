@@ -1,11 +1,15 @@
 import { useState, useEffect } from "react";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
+import GridCard from "./GridCard";
 
 const Body = () => {
   // Local State Variable -  Super Powerful Variable
 
   const [listOfRestaurant, setListOfRestaurant] = useState([]);
+  const [searchText, setSearchText] = useState("");
+  const [filteredRestaurant, setFilteredRestaurant] = useState([]);
+  const [gridRestaurant, setGridRestaurant] = useState([]);
 
   useEffect(() => {
     fetchData();
@@ -17,11 +21,19 @@ const Body = () => {
     );
 
     const json = await data.json();
+    // console.log(json.data);
     // Optional Chaining
+    // json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurant
+
     setListOfRestaurant(
-      // json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurant
       json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
+    setFilteredRestaurant(
+      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
+
+    // json.data.cards[0].card?.card?.imageGridCards
+    setGridRestaurant(json?.data?.cards[0]?.card?.card?.imageGridCards.info);
   };
 
   // Conditional Rendering
@@ -30,27 +42,59 @@ const Body = () => {
   //   return <Shimmer />;
   // }
 
-  return listOfRestaurant.length === 0 ? (
+  return listOfRestaurant?.length === 0 ? (
     <Shimmer />
   ) : (
-    <div className="body">
-      <div className="filter">
-        <button
-          className="filter-btn"
-          onClick={() => {
-            // resList = resList.filter((res) => res.data.avgRating > 4); - won't change UI
-            // console.log(resList)
-            setListOfRestaurant(
-              listOfRestaurant.filter((res) => res?.info?.avgRating > 4)
-            );
-          }}
-        >
-          Top Rated Restaurant
-        </button>
+    <div className="body-card">
+      <div className="filter-container">
+        <div className="search">
+          <input
+            type="text"
+            className="search-box"
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
+          />
+          <button
+            onClick={() => {
+              // Filter the restaurants card by name
+              // we need serach text
+              const filteredRestaurant = listOfRestaurant.filter((res) =>
+                res?.info?.name
+                  ?.toLowerCase()
+                  .includes(searchText.toLowerCase())
+              );
+              setFilteredRestaurant(filteredRestaurant);
+            }}
+          >
+            Search
+          </button>
+        </div>
+        <div className="btn-conatiner">
+          <button
+            className="filter-btn"
+            onClick={() => {
+              // Filter the restaurants card by ratings > 4
+              // resList = resList.filter((res) => res.data.avgRating > 4); - won't change UI
+              // console.log(resList)
+              const filteredRestaurant = listOfRestaurant.filter(
+                (res) => res?.info?.avgRating > 4
+              );
+              setFilteredRestaurant(filteredRestaurant);
+            }}
+          >
+            Top Rated Restaurant
+          </button>
+        </div>
+      </div>
+
+      <div className="caraousel-container">
+        {gridRestaurant.map((grid) => (
+          <GridCard key={grid.id} gridData={grid} />
+        ))}
       </div>
 
       <div className="res-container">
-        {listOfRestaurant.map((restro) => (
+        {filteredRestaurant.map((restro) => (
           <RestaurantCard key={restro.info.id} resData={restro} />
         ))}
       </div>
