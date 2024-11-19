@@ -26,8 +26,6 @@
   color: black;
 }
 
-
-
 .body-card {
   display: flex;
   flex-wrap: wrap;
@@ -105,7 +103,20 @@
   padding: 10px;
 }
 
-/* .grid-card{
+.item-logo {
+  height: 150px;
+  width: 150px;
+}
+
+.menu-cards{
   display: flex;
-  flex-wrap: wrap;
-} */
+  justify-content: space-between;
+  border: 2px solid #f0f0f0;
+  border-radius: 10px;
+  margin: 10px;
+  padding: 10px;
+}
+
+.menu-info{
+text-align: center;
+}

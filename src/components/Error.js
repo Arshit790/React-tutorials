@@ -9,6 +9,7 @@ const Error = () => {
       <h3>
         {err.status}: {err.statusText}
       </h3>
+      <h4>{err.message}</h4>
     </div>
   );
 };

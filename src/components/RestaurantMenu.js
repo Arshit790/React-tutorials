@@ -17,12 +17,12 @@ const RestaurantMenu = () => {
     setResInfo(json.data);
   };
 
-  const { name, cuisines, cloudinaryImageId, costForTwoMessage, avgRating } =
-    resInfo?.cards[2].card.card.info;
+  if (resInfo === null) return <Shimmer />;
 
-  return resInfo === null ? (
-    <Shimmer />
-  ) : (
+  const { name, cuisines, costForTwoMessage, avgRating } =
+    resInfo?.cards[2]?.card?.card?.info;
+
+  return (
     <div className="menu">
       <h1>{name}</h1>
       <p>
