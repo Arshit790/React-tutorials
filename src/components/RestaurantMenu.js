@@ -26,6 +26,10 @@ const RestaurantMenu = () => {
     resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card
       ?.categories[0];
 
+  const { itemCards1 } =
+    resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card
+      ?.categories[1];
+
   return (
     <div className="menu">
       <div className="menu-info">
@@ -38,16 +42,16 @@ const RestaurantMenu = () => {
 
       <div className="menu-items">
         {itemCards.map((item) => (
-          <div className="menu-cards">
+          <div key={item.card?.info?.id} className="menu-cards">
             <div>
-              <h3>{item?.card?.info?.name}</h3>
-              <h3>₹{item?.card?.info?.defaultPrice / 100}</h3>
-              <h3>{item?.card?.info?.description}</h3>
+              <h3>{item.card?.info?.name}</h3>
+              <h3>₹{item.card?.info?.defaultPrice / 100}</h3>
+              <h3>{item.card?.info?.description}</h3>
             </div>
             <img
               className="item-logo"
               alt="item-logo"
-              src={CDN_URL + item?.card?.info?.imageId}
+              src={CDN_URL + item.card?.info?.imageId}
             />
           </div>
         ))}
