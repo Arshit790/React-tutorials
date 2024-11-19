@@ -22,18 +22,36 @@ const RestaurantMenu = () => {
   const { name, cuisines, costForTwoMessage, avgRating } =
     resInfo?.cards[2]?.card?.card?.info;
 
+  const { itemCards } =
+    resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card
+      ?.categories[0];
+
   return (
     <div className="menu">
-      <h1>{name}</h1>
-      <p>
-        {cuisines.join(", ")} - {costForTwoMessage}
-      </p>
-      <h2>{avgRating}</h2>
-      <ul>
-        <li>Biryani</li>
-        <li>Burgera</li>
-        <li>Cold Drinks</li>
-      </ul>
+      <div className="menu-info">
+        <h1>{name}</h1>
+        <p>
+          {cuisines.join(", ")} - {costForTwoMessage}
+        </p>
+        <h3>{avgRating} stars</h3>
+      </div>
+
+      <div className="menu-items">
+        {itemCards.map((item) => (
+          <div className="menu-cards">
+            <div>
+              <h3>{item?.card?.info?.name}</h3>
+              <h3>₹{item?.card?.info?.defaultPrice / 100}</h3>
+              <h3>{item?.card?.info?.description}</h3>
+            </div>
+            <img
+              className="item-logo"
+              alt="item-logo"
+              src={CDN_URL + item?.card?.info?.imageId}
+            />
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
