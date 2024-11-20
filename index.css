@@ -54,6 +54,7 @@
   justify-content: center;
   align-items: center;
 }
+
 .res-card:hover {
   cursor: pointer;
   box-shadow: 0 4px 8px black;
@@ -108,7 +109,7 @@
   width: 150px;
 }
 
-.menu-cards{
+.menu-cards {
   display: flex;
   justify-content: space-between;
   border: 2px solid #f0f0f0;
@@ -117,6 +118,6 @@
   padding: 10px;
 }
 
-.menu-info{
-text-align: center;
+.menu-info {
+  text-align: center;
 }
