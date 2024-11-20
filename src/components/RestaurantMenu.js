@@ -1,18 +1,18 @@
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { CDN_URL } from "../utils/constants";
+import { useParams } from "react-router-dom";
+import { MENU_API } from "../utils/constants";
 
 const RestaurantMenu = () => {
   const [resInfo, setResInfo] = useState(null);
-
+  const { resId } = useParams();
   useEffect(() => {
     fetchMenu();
   }, []);
 
   const fetchMenu = async () => {
-    const data = await fetch(
-      "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=28.627981&lng=77.3648567&restaurantId=53783&catalog_qa=undefined&submitAction=ENTER"
-    );
+    const data = await fetch(MENU_API + resId);
     const json = await data.json();
     setResInfo(json.data);
   };
@@ -23,13 +23,7 @@ const RestaurantMenu = () => {
     resInfo?.cards[2]?.card?.card?.info;
 
   const { itemCards } =
-    resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card
-      ?.categories[0];
-
-  const { itemCards1 } =
-    resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card
-      ?.categories[1];
-
+    resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card;
   return (
     <div className="menu">
       <div className="menu-info">
@@ -39,13 +33,18 @@ const RestaurantMenu = () => {
         </p>
         <h3>{avgRating} stars</h3>
       </div>
-
       <div className="menu-items">
         {itemCards.map((item) => (
           <div key={item.card?.info?.id} className="menu-cards">
             <div>
               <h3>{item.card?.info?.name}</h3>
-              <h3>₹{item.card?.info?.defaultPrice / 100}</h3>
+              <h3>
+                ₹
+                {Math.floor(
+                  item.card?.info?.defaultPrice / 100 ||
+                    item.card?.info?.price / 100
+                )}
+              </h3>
               <h3>{item.card?.info?.description}</h3>
             </div>
             <img
