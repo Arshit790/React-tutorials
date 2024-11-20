@@ -121,3 +121,8 @@
 .menu-info {
   text-align: center;
 }
+
+.category-title {
+  padding: 2px;
+  margin: 10px;
+}
