@@ -19,7 +19,7 @@ const RestaurantMenu = () => {
 
   if (resInfo === null) return <Shimmer />;
 
-  const { name, cuisines, costForTwoMessage, avgRating } =
+  const { name, cuisines, costForTwoMessage, avgRating, id } =
     resInfo?.cards[2]?.card?.card?.info;
 
   // const itemCards =
@@ -34,40 +34,62 @@ const RestaurantMenu = () => {
       )
         return res?.card?.card;
     })
-    .map((item) => item.card.card.itemCards);
+    .map((item) => item?.card?.card);
 
-  const output = resItem.flat().map((item) => item?.card?.info);
   return (
     <div className="menu">
-      <div className="menu-info">
+      <div className="menu-info" key={id}>
         <h1>{name}</h1>
         <p>
           {cuisines.join(", ")} - {costForTwoMessage}
         </p>
         <h3>{avgRating} stars</h3>
       </div>
-      {/* <div className="menu-items">
-        {itemCards.map((item) => (
-          <div key={item.card?.info?.id} className="menu-cards">
+      {/* <div className="menu-items" key={item.id}>
+        {output.map((item, index) => (
+          <div className="menu-cards" key={index}>
             <div>
-              <h3>{item.card?.info?.name}</h3>
+              <h3>{item.name}</h3>
               <h3>
-                ₹
-                {Math.floor(
-                  item.card?.info?.defaultPrice / 100 ||
-                    item.card?.info?.price / 100
-                )}
+                ₹{Math.floor(item.defaultPrice / 100 || item.price / 100)}
               </h3>
-              <h3>{item.card?.info?.description}</h3>
+              <h3>{item.description}</h3>
             </div>
             <img
               className="item-logo"
               alt="item-logo"
-              src={CDN_URL + item.card?.info?.imageId}
+              src={CDN_URL + item.imageId}
             />
           </div>
         ))}
       </div> */}
+
+      <div className="menu-items">
+        {resItem.map((category, index) => (
+          <div key={index} className="category-section">
+            <h2 className="category-title">{category?.title}</h2>
+
+            {category?.itemCards?.map((item) => (
+              <div className="menu-cards" key={item?.card?.info?.id}>
+                <div>
+                  <h3>{item?.card?.info?.name}</h3>
+                  <h3>
+                    ₹
+                    {item?.card?.info?.price / 100 ||
+                      item?.card?.info?.defaultPrice / 100}
+                  </h3>
+                  <p>{item?.card?.info?.description}</p>
+                </div>
+                <img
+                  className="item-logo"
+                  alt="item-logo"
+                  src={CDN_URL + item?.card?.info?.imageId}
+                />
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
