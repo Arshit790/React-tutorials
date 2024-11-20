@@ -66,7 +66,11 @@ const RestaurantMenu = () => {
 
       <div className="menu-items">
         {resItem.map((category, index) => (
-          <div key={index} className="category-section">
+          <div
+            key={index}
+            className="category-section"
+            style={{ backgroundColor: "f0f0f0", border: "1px solid black" }}
+          >
             <h2 className="category-title">{category?.title}</h2>
 
             {category?.itemCards?.map((item) => (
