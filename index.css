@@ -139,3 +139,14 @@
   padding: 10px;
   border: 1px solid rgb(70, 65, 65);
 }
+.toggle-btn {
+  border: none;
+  background-color: transparent;
+  outline: none;
+  cursor: pointer;
+}
+
+.category-title {
+  display: flex;
+  justify-content: space-between;
+}

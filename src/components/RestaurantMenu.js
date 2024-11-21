@@ -3,10 +3,11 @@ import Shimmer from "./Shimmer";
 import { CDN_URL } from "../utils/constants";
 import { useParams } from "react-router-dom";
 import { MENU_API } from "../utils/constants";
-
+import { IoIosArrowDropdown } from "react-icons/io";
 const RestaurantMenu = () => {
   const [resInfo, setResInfo] = useState(null);
   const { resId } = useParams();
+  const [toggle, setToggle] = useState({});
   useEffect(() => {
     fetchMenu();
   }, []);
@@ -36,6 +37,13 @@ const RestaurantMenu = () => {
     })
     .map((item) => item?.card?.card);
 
+  const handleToggle = (index) => {
+    setToggle((prev) => ({
+      ...prev,
+      [index]: !prev[index],
+    }));
+  };
+
   return (
     <div className="menu">
       <div className="menu-info" key={id}>
@@ -45,24 +53,6 @@ const RestaurantMenu = () => {
         </p>
         <h3>{avgRating} stars</h3>
       </div>
-      {/* <div className="menu-items" key={item.id}>
-        {output.map((item, index) => (
-          <div className="menu-cards" key={index}>
-            <div>
-              <h3>{item.name}</h3>
-              <h3>
-                ₹{Math.floor(item.defaultPrice / 100 || item.price / 100)}
-              </h3>
-              <h3>{item.description}</h3>
-            </div>
-            <img
-              className="item-logo"
-              alt="item-logo"
-              src={CDN_URL + item.imageId}
-            />
-          </div>
-        ))}
-      </div> */}
 
       <div className="menu-items">
         {resItem.map((category, index) => (
@@ -71,26 +61,34 @@ const RestaurantMenu = () => {
             className="category-section"
             style={{ backgroundColor: "f0f0f0", border: "1px solid black" }}
           >
-            <h2 className="category-title">{category?.title}</h2>
-
-            {category?.itemCards?.map((item) => (
-              <div className="menu-cards" key={item?.card?.info?.id}>
-                <div>
-                  <h3>{item?.card?.info?.name}</h3>
-                  <h3>
-                    ₹
-                    {item?.card?.info?.price / 100 ||
-                      item?.card?.info?.defaultPrice / 100}
-                  </h3>
-                  <p>{item?.card?.info?.description}</p>
+            <div className="category-title">
+              <h3>{category?.title}</h3>
+              <button
+                className="toggle-btn"
+                onClick={() => handleToggle(index)}
+              >
+                <IoIosArrowDropdown size={25} />
+              </button>
+            </div>
+            {toggle[index] &&
+              category?.itemCards?.map((item) => (
+                <div className="menu-cards" key={item?.card?.info?.id}>
+                  <div>
+                    <h3>{item?.card?.info?.name}</h3>
+                    <h3>
+                      ₹
+                      {item?.card?.info?.price / 100 ||
+                        item?.card?.info?.defaultPrice / 100}
+                    </h3>
+                    <p>{item?.card?.info?.description}</p>
+                  </div>
+                  <img
+                    className="item-logo"
+                    alt="item-logo"
+                    src={CDN_URL + item?.card?.info?.imageId}
+                  />
                 </div>
-                <img
-                  className="item-logo"
-                  alt="item-logo"
-                  src={CDN_URL + item?.card?.info?.imageId}
-                />
-              </div>
-            ))}
+              ))}
           </div>
         ))}
       </div>
