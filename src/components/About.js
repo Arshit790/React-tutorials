@@ -14,7 +14,9 @@ class About extends React.Component {
     // console.log("Parent Render");
     return (
       <div className="about-us">
-        <UserClass name={"Arshit (class1)"} />
+        <User name={"Functional Component"} />
+
+        {/* <UserClass name={"Arshit (class1)"} /> */}
         {/* <UserClass name={"Lucky (class2)"} /> */}
       </div>
     );

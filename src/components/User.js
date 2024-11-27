@@ -1,7 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 const User = ({ name }) => {
   const [count] = useState(0);
   const [count1] = useState(1);
+
+  useEffect(() => {
+    setInterval(() => {
+      console.log("Lucky");
+    }, 1000);
+  }, []);
+
   return (
     <div className="user-card">
       <h1>{count}</h1>

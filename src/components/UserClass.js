@@ -20,13 +20,17 @@ class UserClass extends React.Component {
   async componentDidMount() {
     // console.log(this.props.name + "Child Component Did Mount");
     // API CALLS MADE HERE TO AVOID WAITING FOR COMPONENT TO LOAD
-    const data = await fetch("https://api.github.com/users/Arshit790");
-    const json = await data.json();
-    this.setState({
-      userInfo: json,
-    });
+    // const data = await fetch("https://api.github.com/users/Arshit790");
+    // const json = await data.json();
+    // this.setState({
+    //   userInfo: json,
+    // });
 
-    console.log(json);
+    // console.log(json);
+
+    this.timer = setInterval(() => {
+      console.log("Arshit");
+    }, 1000);
   }
 
   componentDidUpdate() {
@@ -34,6 +38,7 @@ class UserClass extends React.Component {
   }
 
   componentWillUnmount() {
+    clearInterval(this.timer);
     console.log("Component Unmount successfully...");
   }
 
