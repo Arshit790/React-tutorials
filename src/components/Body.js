@@ -3,39 +3,48 @@ import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import GridCard from "./GridCard";
 import { Link } from "react-router-dom";
+import useRestaurant from "../utils/useRestaurant";
 
 const Body = () => {
   // Local State Variable -  Super Powerful Variable
+ // ! Made a custom hook useRestaurant for all the commented code below
+  // const [listOfRestaurant, setListOfRestaurant] = useState([]);
+  // const [searchText, setSearchText] = useState("");
+  // const [filteredRestaurant, setFilteredRestaurant] = useState([]);
+  // const [gridRestaurant, setGridRestaurant] = useState([]);
 
-  const [listOfRestaurant, setListOfRestaurant] = useState([]);
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
+
+  // const fetchData = async () => {
+  //   const data = await fetch(
+  //     "https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.627981&lng=77.3648567&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+  //   );
+
+  //   const json = await data.json();
+  //   // console.log(json.data);
+  //   // Optional Chaining
+  //   // json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurant
+
+  //   setListOfRestaurant(
+  //     json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+  //   );
+  //   setFilteredRestaurant(
+  //     json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+  //   );
+
+  //   // json.data.cards[0].card?.card?.imageGridCards
+  //   setGridRestaurant(json?.data?.cards[0]?.card?.card?.imageGridCards.info);
+  // };
+
+  const [
+    listOfRestaurant,
+    filteredRestaurant,
+    gridRestaurant,
+    setFilteredRestaurant,
+  ] = useRestaurant();
   const [searchText, setSearchText] = useState("");
-  const [filteredRestaurant, setFilteredRestaurant] = useState([]);
-  const [gridRestaurant, setGridRestaurant] = useState([]);
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const fetchData = async () => {
-    const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.627981&lng=77.3648567&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-    );
-
-    const json = await data.json();
-    // console.log(json.data);
-    // Optional Chaining
-    // json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurant
-
-    setListOfRestaurant(
-      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
-    setFilteredRestaurant(
-      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
-
-    // json.data.cards[0].card?.card?.imageGridCards
-    setGridRestaurant(json?.data?.cards[0]?.card?.card?.imageGridCards.info);
-  };
 
   // Conditional Rendering
 
