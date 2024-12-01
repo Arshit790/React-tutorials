@@ -4,10 +4,11 @@ import Shimmer from "./Shimmer";
 import GridCard from "./GridCard";
 import { Link } from "react-router-dom";
 import useRestaurant from "../utils/useRestaurant";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Body = () => {
   // Local State Variable -  Super Powerful Variable
- // ! Made a custom hook useRestaurant for all the commented code below
+  // ! Made a custom hook useRestaurant for all the commented code below
   // const [listOfRestaurant, setListOfRestaurant] = useState([]);
   // const [searchText, setSearchText] = useState("");
   // const [filteredRestaurant, setFilteredRestaurant] = useState([]);
@@ -45,6 +46,12 @@ const Body = () => {
     setFilteredRestaurant,
   ] = useRestaurant();
   const [searchText, setSearchText] = useState("");
+
+  const onlineStatus = useOnlineStatus();
+  if (onlineStatus === false)
+    return (
+      <h1>Looks like you're offline! Please check your internet connection</h1>
+    );
 
   // Conditional Rendering
 

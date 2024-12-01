@@ -150,3 +150,10 @@
   display: flex;
   justify-content: space-between;
 }
+
+.online-btn {
+  border: none;
+  background-color: transparent;
+  outline: none;
+  cursor: pointer;
+}
