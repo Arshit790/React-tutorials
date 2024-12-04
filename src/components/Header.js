@@ -8,12 +8,12 @@ const Header = () => {
   const onlineStatus = useOnlineStatus();
 
   return (
-    <div className="header">
-      <div className="logo-container">
-        <img className="logo" src={LOGO_URL} />
+    <div className="flex justify-between">
+      <div className="flex items-center">
+        <img className="w-20" src={LOGO_URL} />
       </div>
-      <div className="nav-items">
-        <ul>
+      <div className="flex items-center">
+        <ul className="flex p-4 m-4 space-x-3">
           <li>
             <button className="online-btn">{onlineStatus ? "🟢" : "🔴"}</button>
           </li>

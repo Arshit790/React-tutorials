@@ -5,6 +5,7 @@ import GridCard from "./GridCard";
 import { Link } from "react-router-dom";
 import useRestaurant from "../utils/useRestaurant";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 const Body = () => {
   // Local State Variable -  Super Powerful Variable
@@ -62,16 +63,17 @@ const Body = () => {
   return listOfRestaurant?.length === 0 ? (
     <Shimmer />
   ) : (
-    <div className="body-card">
-      <div className="filter-container">
+    <div className="place-content-center">
+      <div className="flex justify-around place-content-center">
         <div className="search">
           <input
             type="text"
-            className="search-box"
+            className="border border-solid rounded-lg mx-2"
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
           />
           <button
+            className="px-2 py-1 bg-orange-50 hover:bg-orange-200 rounded-lg"
             onClick={() => {
               // Filter the restaurants card by name
               // we need serach text
@@ -88,7 +90,7 @@ const Body = () => {
         </div>
         <div className="btn-conatiner">
           <button
-            className="filter-btn"
+            className="p-2 bg-gray-50 hover:bg-gray-200 rounded-lg"
             onClick={() => {
               // Filter the restaurants card by ratings > 4
               // resList = resList.filter((res) => res.data.avgRating > 4); - won't change UI
@@ -104,13 +106,13 @@ const Body = () => {
         </div>
       </div>
 
-      <div className="caraousel-container">
+      <div className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth cursor-pointer scrollbar-hide">
         {gridRestaurant.map((grid) => (
           <GridCard key={grid.id} gridData={grid} />
         ))}
       </div>
 
-      <div className="res-container">
+      <div className="flex flex-wrap place-content-center">
         {filteredRestaurant.map((restro) => (
           <Link
             key={restro.info.id}

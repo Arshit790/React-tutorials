@@ -5,16 +5,20 @@ const RestaurantCard = ({ resData }) => {
   const { deliveryTime } = resData?.info?.sla;
 
   return (
-    <div className="res-card" style={{ backgroundColor: "#f0f0f0" }}>
+    <div className="p-4 m-4 w-80 rounded-lg bg-gray-50 hover:bg-gray-200 shadow">
       <img
-        className="res-logo"
+        className="object-fill h-48 rounded-lg w-full"
         alt="res-logo"
         src={CDN_URL + cloudinaryImageId}
       />
-      <h3>{name}</h3>
-      <h4>{cuisines.join(", ")}</h4>
-      <span>{avgRating}⭐</span>
-      <span>{deliveryTime}mins</span>
+      <p className="truncate text-lg font-semibold py-2">{name}</p>
+      <p className="truncate text-sm text-gray-600 py-2">
+        {cuisines.join(", ")}
+      </p>
+      <div className="flex items-center justify-between text-sm font-medium">
+        <span>{avgRating}⭐</span>
+        <span>{deliveryTime}mins</span>
+      </div>
     </div>
   );
 };
