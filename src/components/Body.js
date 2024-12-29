@@ -5,7 +5,6 @@ import GridCard from "./GridCard";
 import { Link } from "react-router-dom";
 import useRestaurant from "../utils/useRestaurant";
 import useOnlineStatus from "../utils/useOnlineStatus";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 const Body = () => {
   // Local State Variable -  Super Powerful Variable
@@ -39,7 +38,6 @@ const Body = () => {
   //   // json.data.cards[0].card?.card?.imageGridCards
   //   setGridRestaurant(json?.data?.cards[0]?.card?.card?.imageGridCards.info);
   // };
-
   const [
     listOfRestaurant,
     filteredRestaurant,
