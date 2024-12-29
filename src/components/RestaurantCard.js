@@ -23,4 +23,19 @@ const RestaurantCard = ({ resData }) => {
   );
 };
 
+// Higher Order Component - Using for promoted category in Swiggy Api (it's now not been used by Swiggy)
+
+// input - Restaurant Card => return output RestauranCardPromoted
+
+// export const withPromotedLabel = (RestaurantCard) => {
+//   return (props) => {
+//     return (
+//       <div>
+//         <label>Promoted</label>
+//         <RestaurantCard {...props} />
+//       </div>
+//     );
+//   };
+// };
+
 export default RestaurantCard;

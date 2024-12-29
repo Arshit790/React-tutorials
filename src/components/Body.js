@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, { withPromotedLabel } from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import GridCard from "./GridCard";
 import { Link } from "react-router-dom";
@@ -47,6 +47,8 @@ const Body = () => {
     setFilteredRestaurant,
   ] = useRestaurant();
   const [searchText, setSearchText] = useState("");
+
+  // const RestauranCardPromoted = withPromotedLabel(RestaurantCard);
 
   const onlineStatus = useOnlineStatus();
   if (onlineStatus === false)
@@ -119,6 +121,10 @@ const Body = () => {
             style={{ textDecoration: "none", color: "black" }}
             to={"/restaurants/" + restro.info.id}
           >
+            {/** if the restaurant is promoted then add a promoted label to it 
+                restro.info.promoted ? <RestaurantCardPromoted resData={restro} /> : <RestaurantCard resData={restro} />
+
+            */}
             <RestaurantCard resData={restro} />
           </Link>
         ))}
